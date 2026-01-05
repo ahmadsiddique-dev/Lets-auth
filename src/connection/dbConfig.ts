@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export async function connection() {
     try {
-        await mongoose.connect(process.env.MONGDB_URI!)
+        await mongoose.connect(process.env.MONGDB_URI || "mongodb://localhost:27017/onepie")
 
         const connection = mongoose.connection
 
