@@ -8,14 +8,14 @@ export async function POST(request:NextRequest) {
 
         const user = await User.findOne({_id: userId}).select("-password")
 
-        if (!user) return NextResponse.json({message: "User not Found", data: ""})
+        if (!user) return NextResponse.json({message: "User not Found", data: "nothing"})
 
         return NextResponse.json({
             message: "User Found",
             data: user
         })
     } catch (error) {
-        return NextResponse.json({message: "Some Error Occured while geting User", data: ""})
+        return NextResponse.json({message: "Some Error Occured while geting User", data: "nothing"})
     }
     
 }

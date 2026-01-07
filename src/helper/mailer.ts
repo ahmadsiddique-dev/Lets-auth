@@ -13,8 +13,10 @@ export const sendMail = async ({ email, emailType, userId }: any) => {
       });
     } else if (emailType === "RESET") {
       await User.findByIdAndUpdate(userId, {
+        $set: {
         verifyToken: hashedToken,
         verifyTokenExpiry: Date.now() + 3600000,
+      }
       });
     }
 
@@ -37,9 +39,9 @@ export const sendMail = async ({ email, emailType, userId }: any) => {
         emailType === "VERIFY"
           ? `
             <p>
-                Click here <a href="${
+                Click  <a href="${
                   process.env.DOMAIN
-                }/verifyemail?token=${hashedToken}"></a> ${
+                }/verifyemail?token=${hashedToken}">here</a> ${
               emailType === "VERIFY"
                 ? "Verify your email"
                 : "Reset your password"
@@ -51,9 +53,9 @@ export const sendMail = async ({ email, emailType, userId }: any) => {
             `
           : `
              <p>
-                Click here <a href="${
+                Click  <a href="${
                   process.env.DOMAIN
-                }/resetpassword?token=${hashedToken}"></a> ${
+                }/resetpassword?token=${hashedToken}">here</a> ${
               emailType === "VERIFY"
                 ? "Verify your email"
                 : "Reset your password"
